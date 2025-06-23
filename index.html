@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Em có yêu anh không?</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #ffe6f0;
+      margin-top: 100px;
+    }
+    h1 {
+      color: #d63384;
+    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    #yesBtn {
+      background-color: #28a745;
+      color: white;
+      position: absolute;
+    }
+    #noBtn {
+      background-color: #dc3545;
+      color: white;
+    }
+    #message {
+      margin-top: 30px;
+      font-size: 22px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Em có yêu anh không?</h1>
+
+  <button id="yesBtn">Có</button>
+  <button id="noBtn">Không</button>
+
+  <div id="message"></div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const msg = document.getElementById('message');
+
+    // Đặt vị trí ban đầu cho nút "Có"
+    yesBtn.style.top = "200px";
+    yesBtn.style.left = "calc(50% - 100px)";
+
+    // Khi bấm "Không"
+    noBtn.addEventListener('click', () => {
+      msg.innerText = "em không yêu tôi :(";
+    });
+
+    // Khi bấm "Có" => nút nhảy ngẫu nhiên
+    yesBtn.addEventListener('click', () => {
+      const x = Math.floor(Math.random() * (window.innerWidth - 100));
+      const y = Math.floor(Math.random() * (window.innerHeight - 100));
+      yesBtn.style.left = `${x}px`;
+      yesBtn.style.top = `${y}px`;
+    });
+
+    // Các chức năng phụ (ví dụ)
+    let clickCount = 0;
+    const features = () => {
+      document.body.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 90%)`; // đổi nền ngẫu nhiên
+      document.title = "Anh đang chờ câu trả lời..."; // đổi tiêu đề
+      clickCount++;
+      if (clickCount === 5) {
+        alert("Em bấm nhiều quá rồi đó nha 😳");
+      }
+    };
+
+    yesBtn.addEventListener('mouseover', features);
+    noBtn.addEventListener('mouseover', features);
+    document.body.addEventListener('click', () => {
+      console.log("Bạn đã click vào màn hình");
+    });
+    setInterval(() => {
+      console.log("⏰ Thời gian trôi qua...");
+    }, 5000);
+    window.addEventListener('resize', () => {
+      console.log("🔄 Bạn vừa thay đổi kích thước cửa sổ");
+    });
+  </script>
+
+</body>
+</html>
